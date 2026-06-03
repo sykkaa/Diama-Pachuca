@@ -1,3 +1,4 @@
+```html id="r7g2kp"
 <!DOCTYPE html>
 <html lang="es">
 
@@ -283,7 +284,7 @@ mix-blend-mode:screen;
 
 }
 
-/* BOTONES */
+/* CONTENIDO BOTONES */
 
 #content{
 
@@ -311,6 +312,8 @@ animation:contentFade 2s ease forwards;
 animation-delay:1.2s;
 
 }
+
+/* BOTONES */
 
 .btn{
 
@@ -344,6 +347,8 @@ box-shadow:
 0 0 30px rgba(255,255,255,0.03);
 
 }
+
+/* HOVER */
 
 .btn:hover{
 
@@ -394,7 +399,7 @@ background:black;
 
 }
 
-/* CERRAR */
+/* BOTON CERRAR */
 
 #closeBtn{
 
@@ -582,4 +587,213 @@ letter-spacing:2px;
 
 .btn{
 
-min-width:20
+min-width:200px;
+
+font-size:11px;
+
+letter-spacing:4px;
+
+}
+
+#cityTitle{
+
+letter-spacing:8px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ENTER -->
+
+<div id="enterScreen">
+
+<div id="enterText">
+
+ENTER DIAMA
+
+</div>
+
+</div>
+
+<!-- AUDIO LOOP -->
+
+<audio id="bgMusic" loop>
+
+<source
+src="Musica/DiamaLoop.wav"
+type="audio/wav">
+
+</audio>
+
+<!-- FONDO -->
+
+<div id="background">
+
+<img
+src="IMAGENES/FLAYER.jpg"
+id="flyer">
+
+<div id="overlay"></div>
+
+<!-- TITULO -->
+
+<div id="mainTitle">
+
+<div id="diamaTitle">
+DIAMA
+</div>
+
+<div id="cityTitle">
+PACHUCA
+</div>
+
+</div>
+
+<!-- ARTISTAS -->
+
+<div id="artists3d">
+
+<div class="artist">
+andrésestr3s b2b FireflyLight
+</div>
+
+<div class="artist">
+kinychbeat b2b Caparroso
+</div>
+
+<div class="artist">
+Grupo Precario
+</div>
+
+<div class="artist">
+BreakMadre & Caparroso presents:
+Cumbia Extravaganza
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTONES -->
+
+<div id="content">
+
+<button
+class="btn"
+onclick="window.open('https://maps.google.com')">
+
+UBICACIÓN
+
+</button>
+
+<button
+class="btn"
+onclick="alert('AQUÍ PONES EL LINE UP')">
+
+HORARIOS
+
+</button>
+
+<button
+class="btn"
+onclick="openVideo()">
+
+TEASER
+
+</button>
+
+</div>
+
+<!-- VIDEO -->
+
+<div id="videoModal">
+
+<button
+id="closeBtn"
+onclick="closeVideo()">
+
+CERRAR
+
+</button>
+
+<video
+id="videoPlayer"
+controls
+playsinline>
+
+<source
+src="Video/DIAMATEASERWEB.mp4"
+type="video/mp4">
+
+</video>
+
+</div>
+
+<script>
+
+const enterScreen =
+document.getElementById("enterScreen");
+
+const bgMusic =
+document.getElementById("bgMusic");
+
+const videoModal =
+document.getElementById("videoModal");
+
+const videoPlayer =
+document.getElementById("videoPlayer");
+
+/* ENTER */
+
+enterScreen.onclick = async () => {
+
+await bgMusic.play();
+
+enterScreen.style.opacity = "0";
+
+setTimeout(() => {
+
+enterScreen.style.display = "none";
+
+}, 1500);
+
+};
+
+/* ABRIR VIDEO */
+
+function openVideo(){
+
+bgMusic.pause();
+
+videoModal.style.display = "flex";
+
+videoPlayer.play();
+
+}
+
+/* CERRAR VIDEO */
+
+function closeVideo(){
+
+videoModal.style.display = "none";
+
+videoPlayer.pause();
+
+videoPlayer.currentTime = 0;
+
+bgMusic.play();
+
+}
+
+</script>
+
+</body>
+
+</html>
+```
