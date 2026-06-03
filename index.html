@@ -1,4 +1,4 @@
-```html id="5l9m3k"
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -70,7 +70,7 @@ animation:pulse 2.5s ease-in-out infinite;
 
 }
 
-/* FONDO */
+/* BACKGROUND */
 
 #background{
 
@@ -248,7 +248,7 @@ padding:0 20px;
 
 }
 
-/* TEXTO ARTISTAS */
+/* TEXTO */
 
 .artist{
 
@@ -395,7 +395,7 @@ background:black;
 
 }
 
-/* CERRAR */
+/* CLOSE */
 
 #closeBtn{
 
@@ -424,7 +424,7 @@ letter-spacing:2px;
 
 }
 
-/* ANIMACIONES */
+/* ANIMATIONS */
 
 @keyframes fadeIn{
 
@@ -627,7 +627,7 @@ type="audio/wav">
 
 </audio>
 
-<!-- FONDO -->
+<!-- BACKGROUND -->
 
 <div id="background">
 
@@ -637,7 +637,7 @@ id="flyer">
 
 <div id="overlay"></div>
 
-<!-- TITULO -->
+<!-- TITLE -->
 
 <div id="mainTitle">
 
@@ -651,7 +651,7 @@ PACHUCA
 
 </div>
 
-<!-- ARTISTAS -->
+<!-- ARTISTS -->
 
 <div id="artists3d">
 
@@ -676,7 +676,7 @@ Cumbia Extravaganza
 
 </div>
 
-<!-- BOTONES -->
+<!-- BUTTONS -->
 
 <div id="content">
 
@@ -721,11 +721,9 @@ CERRAR
 <video
 id="videoPlayer"
 controls
-playsinline>
-
-<source
-src="DIAMATEASERWEB.mp4"
-type="video/mp4">
+playsinline
+webkit-playsinline
+preload="auto">
 
 </video>
 
@@ -745,11 +743,20 @@ document.getElementById("videoModal");
 const videoPlayer =
 document.getElementById("videoPlayer");
 
+/* VIDEO SOURCE */
+
+videoPlayer.src =
+"./DIAMATEASERWEB.mp4";
+
 /* ENTER */
 
 enterScreen.onclick = async () => {
 
+try{
+
 await bgMusic.play();
+
+}catch(e){}
 
 enterScreen.style.opacity = "0";
 
@@ -761,7 +768,7 @@ enterScreen.style.display = "none";
 
 };
 
-/* ABRIR VIDEO */
+/* OPEN VIDEO */
 
 function openVideo(){
 
@@ -769,11 +776,26 @@ bgMusic.pause();
 
 videoModal.style.display = "flex";
 
+/* FORCE LOAD */
+
+videoPlayer.load();
+
+const playPromise =
 videoPlayer.play();
+
+if(playPromise !== undefined){
+
+playPromise.catch(error => {
+
+console.log(error);
+
+});
 
 }
 
-/* CERRAR VIDEO */
+}
+
+/* CLOSE VIDEO */
 
 function closeVideo(){
 
