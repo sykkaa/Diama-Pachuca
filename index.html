@@ -363,9 +363,9 @@ box-shadow:
 
 }
 
-/* YOUTUBE MODAL */
+/* GENERAL MODAL STYLES (YOUTUBE & HORARIOS) */
 
-#youtubeModal{
+#youtubeModal, #horariosModal{
 
 position:fixed;
 
@@ -375,7 +375,10 @@ left:0;
 width:100%;
 height:100%;
 
-background:black;
+background:rgba(0, 0, 0, 0.85);
+
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
 
 display:none;
 
@@ -385,6 +388,79 @@ align-items:center;
 z-index:99999;
 
 animation:fadeIn 0.4s ease;
+
+}
+
+/* HORARIOS OVERLAY MINIMALISTA */
+
+#horariosContainer{
+
+width:90%;
+max-width:500px;
+
+display:flex;
+flex-direction:column;
+
+gap:28px;
+
+padding:40px 20px;
+
+text-align:center;
+
+}
+
+#horariosTitle{
+
+font-size:24px;
+
+font-weight:900;
+
+letter-spacing:10px;
+
+color:white;
+
+text-transform:uppercase;
+
+margin-bottom:10px;
+
+text-shadow:0 0 15px rgba(255,255,255,0.3);
+
+}
+
+.schedule-row{
+
+display:flex;
+flex-direction:column;
+
+gap:4px;
+
+}
+
+.schedule-time{
+
+font-size:11px;
+
+letter-spacing:4px;
+
+color:#00c3ff;
+
+font-weight:400;
+
+text-shadow:0 0 10px rgba(0,195,255,0.3);
+
+}
+
+.schedule-artist{
+
+font-size:16px;
+
+letter-spacing:3px;
+
+color:rgba(255,255,255,0.9);
+
+text-transform:uppercase;
+
+font-weight:300;
 
 }
 
@@ -408,9 +484,9 @@ border:none;
 
 }
 
-/* CLOSE BUTTON */
+/* CLOSE BUTTONS */
 
-#closeYoutube{
+#closeYoutube, #closeHorarios{
 
 position:absolute;
 
@@ -421,22 +497,32 @@ z-index:100000;
 
 padding:12px 18px;
 
-background:rgba(0,0,0,0.55);
+background:rgba(255,255,255,0.03);
 
 backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 
-border:none;
+border:1px solid rgba(255,255,255,0.08);
 
-border-radius:14px;
+border-radius:999px;
 
 color:white;
 
 cursor:pointer;
 
-font-size:12px;
+font-size:10px;
 
-letter-spacing:2px;
+letter-spacing:3px;
 
+text-transform:uppercase;
+
+transition: 0.3s ease;
+
+}
+
+#closeYoutube:hover, #closeHorarios:hover{
+background:rgba(255,255,255,0.1);
+border-color:rgba(255,255,255,0.2);
 }
 
 /* ANIMATIONS */
@@ -612,6 +698,16 @@ letter-spacing:8px;
 
 }
 
+.schedule-artist{
+font-size:14px;
+letter-spacing:2px;
+}
+
+#horariosTitle{
+font-size:20px;
+letter-spacing:8px;
+}
+
 }
 
 </style>
@@ -619,8 +715,6 @@ letter-spacing:8px;
 </head>
 
 <body>
-
-<!-- ENTER SCREEN -->
 
 <div id="enterScreen">
 
@@ -632,8 +726,6 @@ ENTER DIAMA
 
 </div>
 
-<!-- AUDIO -->
-
 <audio
 id="bgMusic"
 loop>
@@ -644,8 +736,6 @@ type="audio/wav">
 
 </audio>
 
-<!-- BACKGROUND -->
-
 <div id="background">
 
 <img
@@ -653,8 +743,6 @@ src="FLAYER.jpg"
 id="flyer">
 
 <div id="overlay"></div>
-
-<!-- TITLE -->
 
 <div id="mainTitle">
 
@@ -671,8 +759,6 @@ PACHUCA
 </div>
 
 </div>
-
-<!-- ARTISTS -->
 
 <div id="artists3d">
 
@@ -710,8 +796,6 @@ Kinychbeat x FireflyLight
 
 </div>
 
-<!-- BUTTONS -->
-
 <div id="content">
 
 <button
@@ -724,7 +808,7 @@ UBICACIÓN
 
 <button
 class="btn"
-onclick="alert('AQUÍ PONES LOS HORARIOS')">
+onclick="openHorarios()">
 
 HORARIOS
 
@@ -740,7 +824,53 @@ TEASER
 
 </div>
 
-<!-- YOUTUBE MODAL -->
+<div id="horariosModal">
+
+<button
+id="closeHorarios"
+onclick="closeHorarios()">
+
+CERRAR
+
+</button>
+
+<div id="horariosContainer">
+
+<div id="horariosTitle">TIMELINE</div>
+
+<div class="schedule-row">
+<div class="schedule-time">8:00 PM - 9:00 PM</div>
+<div class="schedule-artist">Warm Up</div>
+</div>
+
+<div class="schedule-row">
+<div class="schedule-time">9:00 PM - 10:00 PM</div>
+<div class="schedule-artist">Grupo Precario</div>
+</div>
+
+<div class="schedule-row">
+<div class="schedule-time">10:00 PM - 11:00 PM</div>
+<div class="schedule-artist">Amnoizex x Wvy Loasean</div>
+</div>
+
+<div class="schedule-row">
+<div class="schedule-time">11:00 PM - 12:00 AM</div>
+<div class="schedule-artist">BreakMadre x Caparroso</div>
+</div>
+
+<div class="schedule-row">
+<div class="schedule-time">12:00 AM - 1:00 AM</div>
+<div class="schedule-artist">Awexa x andrésestr3s</div>
+</div>
+
+<div class="schedule-row">
+<div class="schedule-time">1:00 AM - 2:00 AM</div>
+<div class="schedule-artist">Kinychbeat x FireflyLight</div>
+</div>
+
+</div>
+
+</div>
 
 <div id="youtubeModal">
 
@@ -780,6 +910,9 @@ document.getElementById("youtubeModal");
 
 const youtubeFrame =
 document.getElementById("youtubeFrame");
+
+const horariosModal = 
+document.getElementById("horariosModal");
 
 /* ENTER */
 
@@ -833,6 +966,24 @@ youtubeFrame.src = "";
 /* RESUME MUSIC */
 
 bgMusic.play();
+
+}
+
+/* OPEN HORARIOS */
+
+function openHorarios(){
+
+/* SHOW OVERLAY ONLY, MUSIC KEEPS PLAYING */
+
+horariosModal.style.display = "flex";
+
+}
+
+/* CLOSE HORARIOS */
+
+function closeHorarios(){
+
+horariosModal.style.display = "none";
 
 }
 
